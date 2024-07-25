@@ -1,0 +1,15 @@
+class Solution {
+    public int maxScore(int[] cardPoints, int k) {
+        int score = 0;
+        int n = cardPoints.length,maxscore = 0;
+        for (int i=0 ; i<k ; i++){
+            score += cardPoints[i];
+        }
+        maxscore = score ;
+        for (int i=0 ; i<k ; i++){
+            score = score - cardPoints[k-1-i] + cardPoints[n-1-i];
+            maxscore = Math.max(maxscore , score);
+        }     
+        return maxscore;
+    }
+}
