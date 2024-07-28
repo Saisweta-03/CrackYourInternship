@@ -1,0 +1,55 @@
+class Solution {
+    public List<String> fullJustify(String[] words, int maxWidth) {
+        int n = words.length;
+        int i=0;
+        List<String> ans = new ArrayList<>();
+        while(i<n){
+            int l =0;
+            int space=0;
+            int k=i;
+            while(k<n && l+words[k].length()+space<=maxWidth){
+                l+=words[k++].length()+space;
+                space=1;
+            }
+            ans.add(getText(i, k, words, maxWidth, k==n));
+            i=k;
+        }
+        return ans;
+    }
+
+    String getText(int i, int k, String[] words, int maxWidth, boolean isLast){
+        int w = 0;
+        int count = k-i-1;
+        int t =i;
+        StringBuilder sb = new StringBuilder();
+         if(count==0 ) {
+            sb.append(words[t]);
+            sb.append(" ".repeat(maxWidth-words[t].length())); 
+            return sb.toString();
+        }
+        while(t<k){
+            w+=words[t++].length();
+        }
+        int space = maxWidth-w;
+        int btw = space/count;
+        int rem = space%count;
+        t= i;
+        while(t<k){
+           sb.append(words[t++]); 
+           if(isLast){
+             if(t!=k){
+                sb.append(" ");
+                space--;
+              }else{
+                sb.append(" ".repeat(space));
+              }
+           }else{
+               if(t!=k){
+                  sb.append(" ".repeat(btw));
+               }
+               if(rem-- > 0) sb.append(" ");
+           }
+        }
+        return sb.toString();
+    }
+}
