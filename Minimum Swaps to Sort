@@ -1,0 +1,27 @@
+class Solution
+{
+    //Function to find the minimum number of swaps required to sort the array.
+    public int minSwaps(int nums[])
+    {
+        // Code here
+        Map<Integer,Integer> hm=new HashMap<>();
+    for(int i=0; i<nums.length; i++){
+        hm.put(nums[i], i);
+    }
+    Arrays.sort(nums);
+    int ans = 0;
+    for(int i=0; i<nums.length; i++){
+        if(hm.get(nums[i]) != i) {
+            ans++;
+            swap(i, hm.get(nums[i]), nums);
+            i--; //Check current ele which is swapped
+        }
+    }
+    return ans;
+    }
+    void swap(int x,int y,int[] nums){
+        int temp = nums[x];
+        nums[x] = nums[y];
+        nums[y] = temp;
+    }
+}
