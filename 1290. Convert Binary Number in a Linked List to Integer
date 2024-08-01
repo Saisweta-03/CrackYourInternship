@@ -1,0 +1,18 @@
+class Solution {
+    public int getDecimalValue(ListNode head) {
+        ListNode temp = head;
+        int length = 0;
+        while (temp.next != null){
+            temp = temp.next;
+            length++;
+        }
+        temp = head;
+        int ans = 0;
+        while (temp != null && length >= 0){
+            ans+=temp.val*(Math.pow(2,length));
+            temp = temp.next;
+            length--;
+        }
+        return ans;
+    }
+}
