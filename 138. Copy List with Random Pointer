@@ -1,0 +1,20 @@
+class Solution {
+    public Node copyRandomList(Node head) {
+        Map<Node , Node> oldtonew = new HashMap();
+        Node curr = head ;
+        while (curr!=null){
+            oldtonew.put(curr,new Node(curr.val));
+            curr=curr.next;
+        }
+        for (Node node : oldtonew.keySet()){
+            curr = oldtonew.get(node);
+            if (node.next!=null){
+                curr.next = oldtonew.get(node.next);
+            }
+            if (node.random!=null){
+                curr.random = oldtonew.get(node.random);
+            }
+        }
+        return oldtonew.get(head);
+    }
+}
