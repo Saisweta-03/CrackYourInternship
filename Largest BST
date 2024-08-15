@@ -1,0 +1,29 @@
+class Solution{
+    
+    // Return the size of the largest sub-tree which is also a BST
+    static int largestBst(Node root)
+    {
+        // Write your code here
+        if (root == null) {
+            return 0;
+        }
+        int left = largestBst(root.left);
+        int right = largestBst(root.right);
+        if (isBst(root,Integer.MIN_VALUE,Integer.MAX_VALUE)) {
+            return  left+right+1;
+        }
+        return Math.max(left, right);
+    }
+    
+    public static boolean isBst(Node root, int min, int max) {
+        if (root == null) {
+            return true;
+        }
+         if(root.data<=min || root.data>=max)
+            return false;
+        boolean left  = isBst(root.left, min,root.data);
+        boolean right =  isBst(root.right, root.data, max);
+        return left && right;
+    }
+    
+}
